@@ -1,8 +1,6 @@
 # NFL Ref Sentiment Analysis
 Analyze Reddit threads for how win percentage delta affects sentiment directed towards refs
 
-@Nick Edit the paper proposal at the Google Docs link https://docs.google.com/document/d/1SghkqW9KjwRPjkTqzbE5PwmLbw2UXThVHGgy6L6pziQ/edit
-
 Gather comments from any Reddit thread by utilizing the `nfl_gamethread_scraper.py` script
 
 Place personal credentials into the `praw.Reddit` object and the thread url into the `submission` object.
@@ -16,4 +14,9 @@ It is contained inside a `praw.reddit.Reddit` object. A Python Console is necess
 
 Also, Reddit rate limits us. Expect 10k comments to take about an hour. Run the script and go watch a movie or something. 
 
-`nfl_gamethread_sentiment_analysis.py` is currently basically copied from another project and has lots of editing to do don't look too much into that yet.
+The above has been completed as shown in `nfl_gamethread_comments.json`
+
+`nfl_gamethread_sentiment_analysis.py` is currently basically copied from another project and has lots of editing. 
+The parsing of data in the method should be sufficient. 
+
+What we will need to work on is the data analysis function to match the requirements as detailed in `paper2Proposal.pdf`

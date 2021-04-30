@@ -61,7 +61,7 @@ def plot_fit(
                 1
             )
         )
-        (
+            (
             np.unique(
                 date_timestamps
             )
@@ -184,17 +184,26 @@ def json_to_dates(tweets_json):
 
 
 if __name__ == "__main__":
+    # load comments as a variable
     json_file = open(
         'nfl_gamethread_comments.json',
         errors="ignore"
     )
     comments_json = json.load(json_file)
     json_file.close()
+    # inverse comments so order is chronological
     comments_json = comments_json[::-1]
+    # get just the bodies of the tweets, retaining index
     comment_bodies = json_to_tweets(comments_json)
+    # get unix timestamps and human readable dates, retaining index
     comment_date_timestamps, comment_dates = json_to_dates(comments_json)
+    # remove noise from bodies (i.e. links, usernames)
+    # any comments with length zero are then denoted by the null indices
     cleaned_comments, null_indices = remove_noise(comment_bodies)
-
+    # perform sentiment analysis on each body and plot linear regression
+    # compound is likely the most useful score
+    # @Nick this is the bulk of what needs to be changed
+    # everything up to this point is just collecting the data which works as intended
     lin_reg_neg, \
     lin_reg_neu, \
     lin_reg_pos, \
