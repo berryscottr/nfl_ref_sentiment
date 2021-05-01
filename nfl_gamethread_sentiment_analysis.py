@@ -45,7 +45,7 @@ def plot_fit(
         dates,
         scores,
         title,
-        x_label="Date Tweeted Nov 3 - Jan 8 (Unix Time)",
+        x_label="Unix Time of Comment",
         y_label="Sentiment of Tweet"
 ):
     plt.scatter(
