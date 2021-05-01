@@ -11,7 +11,7 @@ sia = vaderSentiment.vaderSentiment.SentimentIntensityAnalyzer()
 
 def remove_noise(tweets):
     cleaned_tweets = []
-    null_tweets = []
+    noise_tweets = []
     i = 0
     link = 0
     for tweet in tweets:
@@ -33,11 +33,15 @@ def remove_noise(tweets):
             "",
             cleaned_tweet
         )
-        if len(cleaned_tweet) == 0:
-            null_tweets.append(i)
+        if len(cleaned_tweet) == 0 or cleaned_tweet.find("t") == -1:
+                # or cleaned_tweet.find("ref") == -1 \
+                # or cleaned_tweet.find("flag") == -1 \
+                # or cleaned_tweet.find("penalty") == -1 \
+                # or cleaned_tweet.find("call") == -1:
+            noise_tweets.append(i)
         cleaned_tweets.append(cleaned_tweet)
         i += 1
-    return cleaned_tweets, null_tweets
+    return cleaned_tweets, noise_tweets
 
 
 def plot_fit(
