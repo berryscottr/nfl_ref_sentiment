@@ -8,7 +8,6 @@ import json
 from datetime import datetime, timezone
 import time
 from scipy.stats import linregress
-from collections import defaultdict
 
 sia = vaderSentiment.vaderSentiment.SentimentIntensityAnalyzer()
 
@@ -76,11 +75,15 @@ def plot_fit(
         ),
         'y->'
     )
-    plt.title("Scatter Plot and Linear Regression of " + title)
+    linear_regression = linregress(ep_delta, scores)
+    p = float('{:.5f}'.format(float(linear_regression.pvalue)))
+    r = linear_regression.rvalue
+    r_sq = float('{:.5f}'.format(float(r ** 2)))
+    plt.title("Scatter Plot and Linear Regression of " + title + "\nP-Value = " + str(p) + " R-Squared = " + str(r_sq))
     plt.xlabel(x_label)
     plt.ylabel(y_label)
+    plt.savefig("plots/" + title + ".png")
     plt.show()
-    linear_regression = linregress(ep_delta, scores)
     return linear_regression
 
 
