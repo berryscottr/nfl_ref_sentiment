@@ -199,16 +199,31 @@ def real_to_unix(realtime):
     return unixtime
 
 
+def combine_json(a, b):
+    comments_json = []
+    i = 0
+    while i < len(a):
+        comments_json.append(a[i])
+    return comments_json
+
+
 if __name__ == "__main__":
     # load comments as a variable
     json_file = open(
-        'nfl_gamethread_comments.json',
+        'nfl_gamethread_comments_new.json',
         errors="ignore"
     )
-    comments_json = json.load(json_file)
+    comments_new_json = json.load(json_file)
     json_file.close()
     # inverse comments so order is chronological
-    comments_json = comments_json[::-1]
+    comments_new_json = comments_new_json[::-1]
+    json_file = open(
+        'nfl_gamethread_comments_old.json',
+        errors="ignore"
+    )
+    comments_old_json = json.load(json_file)
+    json_file.close()
+    comments_json = combine_json(comments_old_json, comments_new_json)
     # get just the bodies of the tweets, retaining index
     comment_bodies = json_to_tweets(comments_json)
     # get unix timestamps and human readable dates, retaining index
