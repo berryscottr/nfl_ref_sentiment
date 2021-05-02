@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import re
 import json
 from datetime import datetime, timezone
+import time
 from scipy.stats import linregress
 
 sia = vaderSentiment.vaderSentiment.SentimentIntensityAnalyzer()
@@ -33,7 +34,7 @@ def remove_noise(tweets):
             "",
             cleaned_tweet
         )
-        ref_words = ['ref', 'flag', 'penalty', 'call']
+        ref_words = ['ref', 'flag', 'penalty', 'call'] # add types of penalties
         if len(cleaned_tweet) > 0:
             is_ref = [word for word in ref_words if(word in cleaned_tweet)]
             if is_ref:
@@ -186,6 +187,18 @@ def json_to_dates(tweets_json):
     return date_timestamp_array, date_array
 
 
+def real_to_unix(realtime):
+    year = 2021
+    month = 1
+    day = 17
+    partitioned_realtime = realtime.partition(':')
+    hour = int(partitioned_realtime[0])
+    minute = int(partitioned_realtime[-1])
+    datetime_real = datetime(year, month, day, hour, minute)
+    unixtime = time.mktime(datetime_real.timetuple())
+    return unixtime
+
+
 if __name__ == "__main__":
     # load comments as a variable
     json_file = open(
@@ -205,10 +218,11 @@ if __name__ == "__main__":
     cleaned_comments, ref_indices = remove_noise(comment_bodies)
     # import csv
     play_by_play = np.genfromtxt('play_by_play.csv', delimiter=',', dtype=str)
+    ep_delta_penalties = np.array(play_by_play[1:, 13])
+    penalty_index = np.array(play_by_play[1:, 12])
+    penalty_realtime = np.array(play_by_play[1:, 14])
+    penalty_unixtime = [real_to_unix(x) for x in penalty_realtime]
     # perform sentiment analysis on each body and plot linear regression
-    # compound is likely the most useful score
-    # @Nick this is the bulk of what needs to be changed
-    # everything up to this point is just collecting the data which works as intended
     lin_reg_neg, \
     lin_reg_neu, \
     lin_reg_pos, \
