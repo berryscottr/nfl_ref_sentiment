@@ -25,7 +25,6 @@ Quarter,Time,Down,ToGo,Location,Detail,TAM,NOR,EPB,EPA,Poss,EP_Delta
 1,6:00,3,1,TAM 26,Alvin Kamara left guard for 1 yard (tackle by William Gholston),0,3,3.200,3.910,NOR,0.71
 1,5:31,1,10,TAM 25,Alvin Kamara left end for 1 yard (tackle by Devin White),0,3,3.910,3.500,NOR,-0.41
 1,4:54,2,9,TAM 24,Drew Brees pass incomplete deep middle intended for Jared Cook,0,3,3.500,2.810,NOR,-0.69
-1,4:49,,,,Timeout #1 by New Orleans Saints,,,,,NOR,0
 1,4:49,3,9,TAM 24,Drew Brees pass incomplete short middle intended for Michael Burton (defended by Jason Pierre-Paul),0,3,2.810,1.870,NOR,-0.94
 1,4:44,4,9,TAM 24,Wil Lutz 42 yard field goal good,0,6,1.870,3.000,NOR,1.13
 1,4:39,,,NOR 35,Wil Lutz kicks off 65 yards touchback.,0,6,0.000,0.610,,0.61
@@ -81,15 +80,12 @@ Quarter,Time,Down,ToGo,Location,Detail,TAM,NOR,EPB,EPA,Poss,EP_Delta
 2,1:31,2,2,TAM 37,Tom Brady pass complete short left to Leonard Fournette for 14 yards (tackle by Marcus Williams),10,13,1.410,2.320,TAM,0.91
 2,1:06,1,10,NOR 49,Tom Brady pass incomplete deep right intended for Chris Godwin (defended by Chauncey Gardner-Johnson),10,13,2.320,1.780,TAM,-0.54
 2,1:01,2,10,NOR 49,Tom Brady pass complete short middle to Leonard Fournette for 8 yards (tackle by Demario Davis),10,13,1.780,2.150,TAM,0.37
-2,0:54,,,,Timeout #1 by Tampa Bay Buccaneers,,,,,,0
 2,0:54,3,2,NOR 41,Leonard Fournette right guard for 7 yards (tackle by Malcolm Jenkins),10,13,2.150,3.310,TAM,1.16
 2,0:37,1,10,NOR 34,Tom Brady for -128 yards. Tom Brady fumbles recovered by Tom Brady at NO-40 Tom Brady pass complete short right to Antonio Brown for 10 yards (tackle by Janoris Jenkins),10,13,3.310,3.970,TAM,0.66
-2,0:27,,,,Timeout #2 by Tampa Bay Buccaneers,,,,,,0
 2,0:27,1,10,NOR 24,Penalty on Aaron Stinnie: False Start 5 yards (no play),10,13,3.970,3.640,TAM,-0.33
 2,0:27,1,15,NOR 29,Tom Brady pass incomplete short middle intended for Rob Gronkowski,10,13,3.640,2.760,TAM,-0.88
 2,0:24,2,15,NOR 29,Tom Brady pass incomplete deep middle intended for Chris Godwin,10,13,2.760,2.080,TAM,-0.68
 2,0:18,3,15,NOR 29,Tom Brady pass complete short right to Cameron Brate for 10 yards (tackle by Malcolm Jenkins),10,13,2.080,2.240,TAM,0.16
-2,0:03,,,,Timeout #3 by Tampa Bay Buccaneers,,,,,,0
 2,0:03,4,5,NOR 19,Ryan Succop 37 yard field goal good,13,13,2.240,3.000,TAM,0.76
 3,15:00,,,TAM 35,Bradley Pinion kicks off 65 yards touchback.,13,13,0.000,0.610,,0.61
 3,15:00,1,10,NOR 25,Drew Brees pass complete short right to Alvin Kamara for 7 yards (tackle by Lavonte David),13,13,0.610,1.010,NOR,0.4
@@ -137,7 +133,6 @@ Quarter,Time,Down,ToGo,Location,Detail,TAM,NOR,EPB,EPA,Poss,EP_Delta
 4,13:19,1,10,TAM 35,Leonard Fournette right guard for 4 yards (tackle by Malcolm Jenkins),20,20,1.270,1.260,TAM,-0.01
 4,12:36,2,6,TAM 39,Leonard Fournette right guard for 1 yard (tackle by Cameron Jordan),20,20,1.260,0.700,TAM,-0.56
 4,11:57,3,5,TAM 40,Tom Brady pass complete deep right to Scott Miller for 29 yards (tackle by Marcus Williams). Penalty on Marshon Lattimore: Defensive Holding (Declined),20,20,0.700,3.510,TAM,2.81
-4,11:26,,,,Timeout #1 by Tampa Bay Buccaneers,,,,,TAM,0
 4,11:26,1,10,NOR 31,Ronald Jones left tackle for 12 yards (tackle by Janoris Jenkins),20,20,3.510,4.310,TAM,0.8
 4,10:49,1,10,NOR 19,Ronald Jones right guard for 1 yard (tackle by Malcolm Jenkins),20,20,4.310,3.880,TAM,-0.43
 4,10:07,2,9,NOR 18,Tom Brady pass incomplete deep left intended for Rob Gronkowski (defended by Malcolm Jenkins),20,20,3.880,3.140,TAM,-0.74
@@ -160,11 +155,8 @@ Quarter,Time,Down,ToGo,Location,Detail,TAM,NOR,EPB,EPA,Poss,EP_Delta
 4,4:48,3,4,NOR 31,Alvin Kamara right tackle for 4 yards (tackle by Devin White),30,20,0.170,1.270,NOR,1.1
 4,4:25,1,10,NOR 35,Drew Brees pass deep right intended for Jared Cook is intercepted by Mike Edwards at TB-47 and returned for 1 yard,30,20,1.270,-2.130,NOR,-3.4
 4,4:17,1,10,TAM 48,Leonard Fournette left guard for no gain (tackle by Alex Anzalone),30,20,2.130,1.580,TAM,-0.55
-4,4:14,,,,Timeout #1 by New Orleans Saints,,,,,,0
 4,4:14,2,10,TAM 48,Leonard Fournette left guard for 2 yards (tackle by Alex Anzalone and Shy Tuttle),30,20,1.580,1.160,TAM,-0.42
-4,4:11,,,,Timeout #2 by New Orleans Saints,,,,,,0
 4,4:11,3,8,TAM 50,Tom Brady pass complete short left to Chris Godwin for 13 yards (tackle by Marcus Williams),30,20,1.160,3.120,TAM,1.96
-4,4:01,,,,Timeout #3 by New Orleans Saints,,,,,,0
 4,4:01,1,10,NOR 37,Leonard Fournette left guard for 3 yards (tackle by Sheldon Rankins),30,20,3.120,2.980,TAM,-0.14
 4,3:15,2,7,NOR 34,Leonard Fournette left guard for 4 yards (tackle by Marcus Davenport),30,20,2.980,2.810,TAM,-0.17
 4,2:27,3,3,NOR 30,Leonard Fournette left guard for 5 yards (tackle by Shy Tuttle),30,20,2.810,3.910,TAM,1.1

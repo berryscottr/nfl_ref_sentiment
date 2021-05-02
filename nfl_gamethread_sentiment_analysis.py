@@ -11,7 +11,7 @@ sia = vaderSentiment.vaderSentiment.SentimentIntensityAnalyzer()
 
 def remove_noise(tweets):
     cleaned_tweets = []
-    noise_tweets = []
+    ref_tweets_index = []
     i = 0
     link = 0
     for tweet in tweets:
@@ -33,15 +33,14 @@ def remove_noise(tweets):
             "",
             cleaned_tweet
         )
-        if len(cleaned_tweet) == 0 or cleaned_tweet.find("t") == -1:
-                # or cleaned_tweet.find("ref") == -1 \
-                # or cleaned_tweet.find("flag") == -1 \
-                # or cleaned_tweet.find("penalty") == -1 \
-                # or cleaned_tweet.find("call") == -1:
-            noise_tweets.append(i)
+        ref_words = ['ref', 'flag', 'penalty', 'call']
+        if len(cleaned_tweet) > 0:
+            is_ref = [word for word in ref_words if(word in cleaned_tweet)]
+            if is_ref:
+                ref_tweets_index.append(i)
         cleaned_tweets.append(cleaned_tweet)
         i += 1
-    return cleaned_tweets, noise_tweets
+    return cleaned_tweets, ref_tweets_index
 
 
 def plot_fit(
@@ -50,7 +49,7 @@ def plot_fit(
         scores,
         title,
         x_label="Unix Time of Comment",
-        y_label="Sentiment of Tweet"
+        y_label="Sentiment of Comment"
 ):
     plt.scatter(
         date_timestamps,
@@ -84,7 +83,7 @@ def analyse_comments(
         comment_date_timestamps,
         comment_dates,
         comments,
-        null_indices
+        ref_indices
 ):
     neg_score_array = []
     neu_score_array = []
@@ -97,7 +96,7 @@ def analyse_comments(
     neu = 0
 
     while i < len(comments):
-        if i not in null_indices:
+        if i in ref_indices:
             tweet = comments[i]
             tweet_timestamp_date = comment_date_timestamps[i]
             tweet_date = comment_dates[i]
@@ -203,7 +202,9 @@ if __name__ == "__main__":
     comment_date_timestamps, comment_dates = json_to_dates(comments_json)
     # remove noise from bodies (i.e. links, usernames)
     # any comments with length zero are then denoted by the null indices
-    cleaned_comments, null_indices = remove_noise(comment_bodies)
+    cleaned_comments, ref_indices = remove_noise(comment_bodies)
+    # import csv
+    play_by_play = np.genfromtxt('play_by_play.csv', delimiter=',', dtype=str)
     # perform sentiment analysis on each body and plot linear regression
     # compound is likely the most useful score
     # @Nick this is the bulk of what needs to be changed
@@ -215,5 +216,5 @@ if __name__ == "__main__":
         comment_date_timestamps,
         comment_dates,
         cleaned_comments,
-        null_indices
+        ref_indices
     )
