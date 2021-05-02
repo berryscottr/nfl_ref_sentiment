@@ -37,7 +37,9 @@ def remove_noise(tweets):
             "",
             cleaned_tweet
         )
-        ref_words = ['ref', 'flag', 'penalty', 'call'] # add types of penalties
+        ref_words = ['referee', 'flag', 'penalty', 'encroachment', 'false start',
+                     'offside', 'holding', 'interference', 'targeting', 'tripping',
+                     'roughing', 'unsportsmanlike']
         if len(cleaned_tweet) > 0:
             is_ref = [word for word in ref_words if(word in cleaned_tweet)]
             if is_ref:
@@ -48,29 +50,28 @@ def remove_noise(tweets):
 
 
 def plot_fit(
-        date_timestamps,
-        dates,
+        ep_delta,
         scores,
         title,
-        x_label="Unix Time of Comment",
-        y_label="Sentiment of Comment"
+        x_label="Delta in Estimated Points on Drive",
+        y_label="Sentiment of Referee-Directed Comment"
 ):
     plt.scatter(
-        date_timestamps,
+        ep_delta,
         scores
     )
     plt.plot(
-        np.unique(date_timestamps),
+        np.unique(ep_delta),
         np.poly1d(
             np.polyfit(
-                date_timestamps,
+                ep_delta,
                 scores,
                 1
             )
         )
             (
             np.unique(
-                date_timestamps
+                ep_delta
             )
         ),
         'y->'
@@ -79,11 +80,12 @@ def plot_fit(
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.show()
-    linear_regression = linregress(date_timestamps, scores)
+    linear_regression = linregress(ep_delta, scores)
     return linear_regression
 
 
-def analyse_comments(
+def analyze_comments(
+        comments_ep_delta,
         comment_date_timestamps,
         comment_dates,
         comments,
@@ -94,6 +96,7 @@ def analyse_comments(
     pos_score_array = []
     compound_score_array = []
     date_timestamp_array = []
+    comments_ep_delta_array = []
     date_array = []
     plot_x = []
     i = 0
@@ -129,31 +132,28 @@ def analyse_comments(
                 plot_x.append(i + 1)
                 date_timestamp_array.append(tweet_timestamp_date)
                 date_array.append(tweet_date)
+                comments_ep_delta_array.append(comments_ep_delta[i])
             else:
                 neu += 1
         i += 1
 
     lin_reg_neg = plot_fit(
-        date_timestamp_array,
-        date_array,
+        comments_ep_delta_array,
         neg_score_array,
         "Negative Scores"
     )
     lin_reg_neu = plot_fit(
-        date_timestamp_array,
-        date_array,
+        comments_ep_delta_array,
         neu_score_array,
         "Neutral Scores"
     )
     lin_reg_pos = plot_fit(
-        date_timestamp_array,
-        date_array,
+        comments_ep_delta_array,
         pos_score_array,
         "Positive Scores"
     )
     lin_reg_compound = plot_fit(
-        date_timestamp_array,
-        date_array,
+        comments_ep_delta_array,
         compound_score_array,
         "Compound Scores"
     )
@@ -219,15 +219,42 @@ if __name__ == "__main__":
     cleaned_comments, ref_indices = remove_noise(comment_bodies)
     # import csv
     play_by_play = np.genfromtxt('play_by_play.csv', delimiter=',', dtype=str)
-    ep_delta_penalties = np.array(play_by_play[1:, 13])
-    penalty_index = np.array(play_by_play[1:, 12])
+    # ep_delta_penalties = np.array(play_by_play[1:, 13]).astype(dtype=float)
+    # ep_delta_penalties_uniq = np.unique(ep_delta_penalties)
+    ep_delta_penalties_uniq = [0, 1.97, 1.2, 0.86, 0.66, -0.67, 1.3, 1.49, -0.33, -0.33, 2.52, 1.16, -1.32]
+    ep_delta_penalties_abs = np.absolute(ep_delta_penalties_uniq)
+    penalty_index = np.array(play_by_play[1:, 12]).astype(dtype=int)
+    # penalty_index_uniq = np.unique(penalty_index)
+    penalty_index_uniq = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     penalty_realtime = np.array(play_by_play[1:, 14])
     penalty_unixtime = [real_to_unix(x) for x in penalty_realtime]
+    penalty_unixtime_uniq = np.unique(penalty_unixtime)
+    # assign comment to penalty bucket
+    comments_penalty_bucket = np.zeros_like(comment_date_timestamps)
+    i = 0
+    while i < len(comment_date_timestamps):
+        j = 0
+        while j < len(penalty_unixtime_uniq):
+            if comment_date_timestamps[i] > penalty_unixtime_uniq[j]:
+                comments_penalty_bucket[i] = j
+            j += 1
+        i += 1
+    # assign comments their penalty ep delta
+    comments_ep_delta = np.zeros_like(comment_date_timestamps)
+    i = 0
+    while i < len(comment_date_timestamps):
+        j = 0
+        while j < len(penalty_unixtime_uniq):
+            if comment_date_timestamps[i] > penalty_unixtime_uniq[j]:
+                comments_ep_delta[i] = ep_delta_penalties_abs[j]
+            j += 1
+        i += 1
     # perform sentiment analysis on each body and plot linear regression
     lin_reg_neg, \
     lin_reg_neu, \
     lin_reg_pos, \
-    lin_reg_compound = analyse_comments(
+    lin_reg_compound = analyze_comments(
+        comments_ep_delta,
         comment_date_timestamps,
         comment_dates,
         cleaned_comments,
