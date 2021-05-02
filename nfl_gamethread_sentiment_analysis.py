@@ -1,5 +1,3 @@
-import codecs
-
 import vaderSentiment.vaderSentiment
 import numpy as np
 import matplotlib.pyplot as plt
@@ -118,21 +116,9 @@ def analyze_comments(
             compound_score = score['compound']
             if neu_score < 1:
                 neg_score_array.append(neg_score)
-                neg_score_avg = np.mean(neg_score_array)
                 neu_score_array.append(neu_score)
-                neu_score_avg = np.mean(neu_score_array)
                 pos_score_array.append(pos_score)
-                pos_score_avg = np.mean(pos_score_array)
                 compound_score_array.append(compound_score)
-                compound_score_avg = np.mean(compound_score_array)
-                # print(
-                #     [
-                #         neg_score_avg,
-                #         neu_score_avg,
-                #         pos_score_avg,
-                #         compound_score_avg
-                #     ]
-                # )
                 plot_x.append(i + 1)
                 date_timestamp_array.append(tweet_timestamp_date)
                 date_array.append(tweet_date)
@@ -219,12 +205,8 @@ if __name__ == "__main__":
     cleaned_comments, ref_indices = remove_noise(comment_bodies)
     # import csv
     play_by_play = np.genfromtxt('play_by_play.csv', delimiter=',', dtype=str)
-    # ep_delta_penalties = np.array(play_by_play[1:, 13]).astype(dtype=float)
-    # ep_delta_penalties_uniq = np.unique(ep_delta_penalties)
     ep_delta_penalties_uniq = [0, 1.97, 1.2, 0.86, 0.66, -0.67, 1.3, 1.49, -0.33, -0.33, 2.52, 1.16, -1.32]
     ep_delta_penalties_abs = np.absolute(ep_delta_penalties_uniq)
-    penalty_index = np.array(play_by_play[1:, 12]).astype(dtype=int)
-    # penalty_index_uniq = np.unique(penalty_index)
     penalty_index_uniq = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     penalty_realtime = np.array(play_by_play[1:, 14])
     penalty_unixtime = [real_to_unix(x) for x in penalty_realtime]
@@ -249,7 +231,7 @@ if __name__ == "__main__":
                 comments_ep_delta[i] = ep_delta_penalties_abs[j]
             j += 1
         i += 1
-    # perform sentiment analysis on each body and plot linear regression
+    # perform sentiment analysis on each body and plot linear regression of ep_delta vs score
     lin_reg_neg, \
     lin_reg_neu, \
     lin_reg_pos, \
