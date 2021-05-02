@@ -76,9 +76,9 @@ def plot_fit(
         'y->'
     )
     linear_regression = linregress(ep_delta, scores)
-    p = float('{:.5f}'.format(float(linear_regression.pvalue)))
+    p = float('{:.10f}'.format(float(linear_regression.pvalue)))
     r = linear_regression.rvalue
-    r_sq = float('{:.5f}'.format(float(r ** 2)))
+    r_sq = float('{:.10f}'.format(float(r ** 2)))
     plt.title("Scatter Plot and Linear Regression of " + title + "\nP-Value = " + str(p) + " R-Squared = " + str(r_sq))
     plt.xlabel(x_label)
     plt.ylabel(y_label)
