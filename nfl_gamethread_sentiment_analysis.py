@@ -84,6 +84,7 @@ def plot_fit(
     plt.ylabel(y_label)
     plt.savefig("plots/" + title + ".png")
     plt.show()
+    print(title, linear_regression)
     return linear_regression
 
 
@@ -160,10 +161,6 @@ def analyze_comments(
         compound_score_array,
         "Compound Scores"
     )
-    # print(lin_reg_neg)
-    # print(lin_reg_neu)
-    # print(lin_reg_pos)
-    # print(lin_reg_compound)
     return lin_reg_neg, lin_reg_neu, lin_reg_pos, lin_reg_compound
 
 
