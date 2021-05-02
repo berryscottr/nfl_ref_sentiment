@@ -20,3 +20,5 @@ The above has been completed as shown in `nfl_gamethread_comments.json`
 The parsing of data in the method should be sufficient. 
 
 What we will need to work on is the data analysis function to match the requirements as detailed in `paper2Proposal.pdf`
+
+@Nick Paper being written in Google Doc https://docs.google.com/document/d/1zPV4MP748wFtMuhwhfpSLLL22-3pl02KvHLVb3-nnBU/edit
