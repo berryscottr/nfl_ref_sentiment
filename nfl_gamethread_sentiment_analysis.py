@@ -83,7 +83,7 @@ def plot_fit(
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.savefig("plots/" + title + ".png")
-    # plt.show()
+    plt.show()
     print(title, linear_regression)
     return linear_regression
 
