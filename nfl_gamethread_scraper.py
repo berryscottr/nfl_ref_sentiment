@@ -12,8 +12,9 @@ if __name__ == "__main__":
                          password='pass')
     # Insert your thread url here
     submission = reddit.submission(url='https://www.reddit.com/r/nfl/comments/kzhfxm/game_thread_tampa_bay_buccaneers_115_at_new/')
+    submission.comment_sort = 'old'
     # Uncomment and set number of times the script will load more comments
-    # submission.comments.replace_more(limit=1500)
+    # submission.comments.replace_more(limit=4000)
     submission_comments = np.array(submission.comments._comments)
     comments = []
     i = 0
@@ -34,4 +35,4 @@ if __name__ == "__main__":
         i += 1
     submission_comments_array = np.asarray(comments)
     submission_comments_list = submission_comments_array.tolist()
-    json.dump(submission_comments_list, codecs.open('nfl_gamethread_comments.json', 'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True, indent=4)
+    json.dump(submission_comments_list, codecs.open('nfl_gamethread_comments_full.json', 'w', encoding='utf-8'), separators=(',', ':'), sort_keys=True, indent=4)
